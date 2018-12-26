@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AlumnoSolicitudModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DETALLE_SOLICITUD">
+          <Key>
+            <PropertyRef Name="COD_DETALLE" />
+            <PropertyRef Name="COD_UNICO" />
+          </Key>
+          <Property Name="COD_DETALLE" Type="number" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="COD_CURSO" Type="varchar2" MaxLength="6" />
+          <Property Name="COD_TIPO_PRUEBA" Type="char" MaxLength="2" />
+          <Property Name="NUM_PRUEBA" Type="number" Precision="5" Scale="0" />
+          <Property Name="SECCION" Type="varchar2" MaxLength="4" />
+          <Property Name="GRUPO" Type="char" MaxLength="2" />
+          <Property Name="ESTADO_CURSO" Type="varchar2" MaxLength="2" />
+          <Property Name="COD_UNICO" Type="number" Precision="15" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SOLICITUD">
+          <Key>
+            <PropertyRef Name="COD_UNICO" />
+          </Key>
+          <Property Name="COD_LINEA_NEGOCIO" Type="char" MaxLength="1" />
+          <Property Name="COD_MODAL_EST" Type="char" MaxLength="2" />
+          <Property Name="COD_PERIODO" Type="char" MaxLength="6" />
+          <Property Name="COD_TRAMITE" Type="number" Precision="5" Scale="0" />
+          <Property Name="COD_UNICO" Type="number" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="ESTADO" Type="varchar2" MaxLength="2" />
+          <Property Name="COD_ALUMNO" Type="char" MaxLength="9" />
+        </EntityType>
+        <Association Name="SYS_C0014432">
+          <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+          <End Role="DETALLE_SOLICITUD" Type="Self.DETALLE_SOLICITUD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOLICITUD">
+              <PropertyRef Name="COD_UNICO" />
+            </Principal>
+            <Dependent Role="DETALLE_SOLICITUD">
+              <PropertyRef Name="COD_UNICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_READSOLICITUDDETALLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+          <Parameter Name="COD_LINEA_NEGOCIO_EX" Type="char" Mode="In" />
+          <Parameter Name="COD_MODAL_EST_EX" Type="char" Mode="In" />
+          <Parameter Name="COD_PERIODO_EX" Type="char" Mode="In" />
+          <Parameter Name="COD_TRAMITE_EX" Type="number" Mode="In" />
+          <Parameter Name="ESTADO_EX" Type="varchar2" Mode="In" />
+        </Function>
+        <EntityContainer Name="AlumnoSolicitudModelStoreContainer">
+          <EntitySet Name="DETALLE_SOLICITUD" EntityType="Self.DETALLE_SOLICITUD" Schema="HR" store:Type="Tables" />
+          <EntitySet Name="SOLICITUD" EntityType="Self.SOLICITUD" Schema="HR" store:Type="Tables" />
+          <AssociationSet Name="SYS_C0014432" Association="Self.SYS_C0014432">
+            <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+            <End Role="DETALLE_SOLICITUD" EntitySet="DETALLE_SOLICITUD" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AlumnoSolicitudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DETALLE_SOLICITUD">
+          <Key>
+            <PropertyRef Name="COD_DETALLE" />
+            <PropertyRef Name="COD_UNICO" />
+          </Key>
+          <Property Name="COD_DETALLE" Type="Int64" Nullable="false" />
+          <Property Name="COD_CURSO" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="COD_TIPO_PRUEBA" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="NUM_PRUEBA" Type="Int16" />
+          <Property Name="SECCION" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="GRUPO" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="ESTADO_CURSO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="COD_UNICO" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="SOLICITUD" Relationship="Self.SYS_C0014432" FromRole="DETALLE_SOLICITUD" ToRole="SOLICITUD" />
+        </EntityType>
+        <EntityType Name="SOLICITUD">
+          <Key>
+            <PropertyRef Name="COD_UNICO" />
+          </Key>
+          <Property Name="COD_LINEA_NEGOCIO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="COD_MODAL_EST" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="COD_PERIODO" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="COD_TRAMITE" Type="Int16" />
+          <Property Name="COD_UNICO" Type="Int64" Nullable="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="COD_ALUMNO" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="DETALLE_SOLICITUD" Relationship="Self.SYS_C0014432" FromRole="SOLICITUD" ToRole="DETALLE_SOLICITUD" />
+        </EntityType>
+        <Association Name="SYS_C0014432">
+          <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+          <End Role="DETALLE_SOLICITUD" Type="Self.DETALLE_SOLICITUD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOLICITUD">
+              <PropertyRef Name="COD_UNICO" />
+            </Principal>
+            <Dependent Role="DETALLE_SOLICITUD">
+              <PropertyRef Name="COD_UNICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SolucitudesContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DETALLE_SOLICITUD" EntityType="Self.DETALLE_SOLICITUD" />
+          <EntitySet Name="SOLICITUD" EntityType="Self.SOLICITUD" />
+          <AssociationSet Name="SYS_C0014432" Association="Self.SYS_C0014432">
+            <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+            <End Role="DETALLE_SOLICITUD" EntitySet="DETALLE_SOLICITUD" />
+          </AssociationSet>
+          <FunctionImport Name="SP_READSOLICITUDDETALLE">
+            <Parameter Name="COD_LINEA_NEGOCIO_EX" Mode="In" Type="String" />
+            <Parameter Name="COD_MODAL_EST_EX" Mode="In" Type="String" />
+            <Parameter Name="COD_PERIODO_EX" Mode="In" Type="String" />
+            <Parameter Name="COD_TRAMITE_EX" Mode="In" Type="Decimal" />
+            <Parameter Name="ESTADO_EX" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AlumnoSolicitudModelStoreContainer" CdmEntityContainer="SolucitudesContext">
+          <EntitySetMapping Name="DETALLE_SOLICITUD">
+            <EntityTypeMapping TypeName="AlumnoSolicitudModel.DETALLE_SOLICITUD">
+              <MappingFragment StoreEntitySet="DETALLE_SOLICITUD">
+                <ScalarProperty Name="COD_DETALLE" ColumnName="COD_DETALLE" />
+                <ScalarProperty Name="COD_CURSO" ColumnName="COD_CURSO" />
+                <ScalarProperty Name="COD_TIPO_PRUEBA" ColumnName="COD_TIPO_PRUEBA" />
+                <ScalarProperty Name="NUM_PRUEBA" ColumnName="NUM_PRUEBA" />
+                <ScalarProperty Name="SECCION" ColumnName="SECCION" />
+                <ScalarProperty Name="GRUPO" ColumnName="GRUPO" />
+                <ScalarProperty Name="ESTADO_CURSO" ColumnName="ESTADO_CURSO" />
+                <ScalarProperty Name="COD_UNICO" ColumnName="COD_UNICO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOLICITUD">
+            <EntityTypeMapping TypeName="AlumnoSolicitudModel.SOLICITUD">
+              <MappingFragment StoreEntitySet="SOLICITUD">
+                <ScalarProperty Name="COD_LINEA_NEGOCIO" ColumnName="COD_LINEA_NEGOCIO" />
+                <ScalarProperty Name="COD_MODAL_EST" ColumnName="COD_MODAL_EST" />
+                <ScalarProperty Name="COD_PERIODO" ColumnName="COD_PERIODO" />
+                <ScalarProperty Name="COD_TRAMITE" ColumnName="COD_TRAMITE" />
+                <ScalarProperty Name="COD_UNICO" ColumnName="COD_UNICO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="COD_ALUMNO" ColumnName="COD_ALUMNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_READSOLICITUDDETALLE" FunctionName="AlumnoSolicitudModel.Store.SP_READSOLICITUDDETALLE" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

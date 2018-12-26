@@ -1,0 +1,83 @@
+﻿@model IEnumerable<EvalTecUPC.Models.DETALLE_SOLICITUD>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Resultados de B&uacute;queda</title>
+</head>
+<body>
+    @*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.COD_DETALLE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.COD_CURSO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.COD_TIPO_PRUEBA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NUM_PRUEBA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SECCION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GRUPO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ESTADO_CURSO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.COD_UNICO)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.COD_DETALLE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COD_CURSO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COD_TIPO_PRUEBA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NUM_PRUEBA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SECCION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GRUPO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ESTADO_CURSO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COD_UNICO)
+            </td>
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>*@
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
